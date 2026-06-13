@@ -55,7 +55,17 @@ personal-money-tracker/
 - Commit source files and push to GitHub
 - Use GitHub Actions via `.github/workflows/deploy.yml` to verify builds on every push
 
-If you want GitHub Pages hosting, use `npm run build` and deploy the `dist/` folder.
+## Vercel Compatibility
+
+This app is ready for Vercel deployment.
+
+1. Push your repository to GitHub.
+2. Sign in to Vercel and import the repo.
+3. Use the default build settings:
+   - Framework: `Vite`
+   - Build command: `npm run build`
+   - Output directory: `dist`
+4. Add the following `vercel.json` file to support client-side routing.
 
 ## Notes
 
