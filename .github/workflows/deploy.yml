@@ -9,15 +9,15 @@ on:
       - main
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - name: Run build
-        run: npm run build
+      - name: Validate HTML structure
+        run: |
+          echo "✓ Static HTML app - no build required"
+          test -f index.html || exit 1
+          test -f script.js || exit 1
+          test -f styles.css || exit 1
+          echo "✓ All required files present"
+

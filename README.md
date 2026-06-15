@@ -1,74 +1,87 @@
-# Personal Job Application Tracker
+# Personal Money Tracker
 
-A React + Vite app for tracking UK cyber security graduate job applications. It stores application data in `localStorage` and works offline after initial load.
+A static personal money tracker built with HTML, CSS, and JavaScript. Track income, expenses, savings goals, and weekly progress with persistent local storage. The app works offline after initial load and includes PWA support.
 
 ## Features
 
-- Dashboard summary with applications, interviews, offers, rejections, and success rate
-- Add, edit, and delete job applications
-- Search, filter, and sort applications by status, company, type, and sponsorship
-- Application details with timeline and notes
-- Follow-up tracker with overdue reminders
-- Statistics dashboard for sources, companies, and conversion rates
-- Export to CSV and Excel, plus backup/restore JSON
+- **Dashboard** – Summary of total income, expenses, and current balance
+- **Savings Goal Tracking** – Monitor progress toward a savings target with deadline
+- **Weekly Progress** – Track weekly income, expenses, and net against a weekly target
+- **Monthly Breakdown** – Visual breakdown by month and category
+- **Transaction Management** – Add, edit, and delete transactions with categories and descriptions
+- **Settings & Goals** – Customize savings goals, weekly targets, and notification preferences
+- **Notifications** – Optional reminders for financial tracking (requires browser permission)
+- **PWA Support** – Install as a standalone app on desktop and mobile devices
+- **Offline Support** – Full functionality after initial page load using Service Worker
 
-## Folder Structure
+## Project Structure
 
 ```
 personal-money-tracker/
-  index.html
-  package.json
-  tsconfig.json
-  vite.config.ts
-  src/
-    main.tsx
-    App.tsx
-    pages/
-    lib/
-    data/
-    styles.css
-  public/
+  ├── index.html           # Main HTML entry point
+  ├── script.js            # Application logic
+  ├── styles.css           # Styling
+  ├── service-worker.js    # Service Worker for offline support
+  ├── manifest.json        # PWA manifest
+  ├── icon.svg             # App icon
+  ├── package.json         # Project metadata
+  └── vercel.json          # Vercel deployment config
 ```
 
-## Run Locally
+## Setup & Running Locally
 
-1. Open a terminal in `c:\Users\pdivy\personal-money-tracker`
-2. Install dependencies once:
-   - `npm install`
-3. Start the dev server:
-   - `npm run dev`
-   - or `npm start`
-4. Open the local URL shown by Vite, for example:
-   - `http://localhost:5173`
+### Option 1: Direct Browser
+Simply open `index.html` in your browser for full functionality. Data persists in `localStorage`.
 
-> Do not open `index.html` directly using `file://`.
-> The app must be served over `http://` by Vite.
+### Option 2: Local HTTP Server (Recommended)
+To ensure proper Service Worker registration, serve over HTTP:
 
-## Build and Preview
+```bash
+# Python 3
+python -m http.server 8000
 
-- Build production files: `npm run build`
-- Preview production build: `npm run preview`
+# Python 2
+python -m SimpleHTTPServer 8000
 
-## GitHub Compatibility
+# Node.js (if http-server is installed)
+npx http-server
+```
+Then open `http://localhost:8000` in your browser.
 
-- Add this project to a Git repo with `git init`
-- Commit source files and push to GitHub
-- Use GitHub Actions via `.github/workflows/deploy.yml` to verify builds on every push
+## Data Storage & Privacy
 
-## Vercel Compatibility
+- All data is stored in the browser's `localStorage`
+- No data is sent to any server
+- Data persists between browser sessions
+- Clear your browser's storage to delete all data
+- Use the export/backup feature to create manual backups
 
-This app is ready for Vercel deployment.
+## Deployment
 
-1. Push your repository to GitHub.
-2. Sign in to Vercel and import the repo.
-3. Use the default build settings:
-   - Framework: `Vite`
-   - Build command: `npm run build`
-   - Output directory: `dist`
-4. Add the following `vercel.json` file to support client-side routing.
+### GitHub Pages
+1. Push to GitHub and enable GitHub Pages in repository settings
+2. Select `main` branch as the source
+3. Your tracker will be available at `https://username.github.io/applicationmoneytracker`
+
+### Vercel
+1. Push to GitHub
+2. Import the repo into Vercel
+3. Default settings work out of the box
+4. The `vercel.json` file handles client-side routing
+
+### Manual Hosting
+Simply copy all files to any static hosting service (Netlify, AWS S3, etc.)
+
+## Browser Support
+
+- All modern browsers with localStorage and Service Worker support
+- Chrome/Edge 40+
+- Firefox 25+
+- Safari 10+ (PWA support varies)
 
 ## Notes
 
-- Data is saved permanently in the browser's `localStorage`
-- The app works offline once loaded from the dev or preview server
-- Use export / backup features to move data between browsers
+- The app requires JavaScript to be enabled
+- Push notifications require explicit user permission
+- Data is cleared if browser cache is cleared manually
+- For the best experience, use the app as an installed PWA on mobile devices
