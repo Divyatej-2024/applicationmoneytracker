@@ -61,7 +61,7 @@ Then open `http://localhost:8000` in your browser.
 ### GitHub Pages
 1. Push to GitHub and enable GitHub Pages in repository settings
 2. Select `main` branch as the source
-3. Your tracker will be available at `https://username.github.io/applicationmoneytracker`
+3. Your tracker will be available at `https://divyatej-2024.github.io/applicationmoneytracker`
 
 ### Vercel
 1. Push to GitHub
