@@ -1,18 +1,196 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Application Tracker</title>
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Personal Money Tracker</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <h1>Personal Money Tracker</h1>
+          <p>Track income, expenses, savings goals, and weekly progress.</p>
+        </div>
+        <div class="hero-actions">
+          <div class="goal-pill">PWA-ready HTML · CSS · JavaScript</div>
+          <button id="install-app-button" class="secondary hidden">Install App</button>
+        </div>
+      </header>
+
+      <div class="grid dashboard-panel">
+        <section class="card progress-card">
+          <h2>Snapshot</h2>
+          <div class="stat-row">
+            <div>
+              <p class="stat-label">Income</p>
+              <p id="total-income" class="stat-value">£0.00</p>
+            </div>
+            <div>
+              <p class="stat-label">Expenses</p>
+              <p id="total-expenses" class="stat-value">£0.00</p>
+            </div>
+            <div>
+              <p class="stat-label">Balance</p>
+              <p id="current-balance" class="stat-value">£0.00</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card progress-card">
+          <h2>Savings Goal</h2>
+          <div class="goal-summary">
+            <div class="goal-progress-bar">
+              <div id="goal-progress-bar" class="progress-fill"></div>
+            </div>
+            <p id="goal-progress-text" class="stat-value">0%</p>
+            <p id="goal-deadline" class="stat-label">Target date: 10 Sep</p>
+            <p id="goal-remaining">Remaining £0.00</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid stats-panel">
+        <section class="card">
+          <h2>Weekly tracker</h2>
+          <div class="stat-row">
+            <div>
+              <p class="stat-label">Net this week</p>
+              <p id="weekly-net" class="stat-value">£0.00</p>
+            </div>
+            <div>
+              <p class="stat-label">Weekly target</p>
+              <p id="weekly-target-display" class="stat-value">£0.00</p>
+            </div>
+            <div>
+              <p class="stat-label">Progress</p>
+              <p id="weekly-progress" class="stat-value">0%</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card wide-card">
+          <h2>Monthly breakdown</h2>
+          <div id="monthly-list" class="monthly-list">
+            <p>No transaction data yet.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid forms-panel">
+        <section class="card form-card">
+          <h2>Add or update transaction</h2>
+          <form id="transaction-form">
+            <input type="hidden" id="transaction-id" />
+            <label for="transaction-amount">Amount</label>
+            <input id="transaction-amount" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+
+            <label for="transaction-type">Type</label>
+            <select id="transaction-type">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+
+            <label for="transaction-category">Category</label>
+            <select id="transaction-category">
+              <option value="salary">Salary</option>
+              <option value="freelance">Freelance</option>
+              <option value="groceries">Groceries</option>
+              <option value="rent">Rent</option>
+              <option value="utilities">Utilities</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="other">Other</option>
+            </select>
+
+            <label for="transaction-date">Date</label>
+            <input id="transaction-date" type="date" required />
+
+            <label for="transaction-description">Description</label>
+            <input id="transaction-description" type="text" placeholder="Optional description" />
+
+            <div class="form-actions">
+              <button type="submit" id="transaction-submit">Save Transaction</button>
+              <button type="button" id="transaction-cancel" class="secondary hidden">Cancel</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card form-card">
+          <h2>Goals & settings</h2>
+          <form id="goal-form">
+            <label for="goal-amount">Savings goal</label>
+            <input id="goal-amount" type="number" min="1" step="1" value="2500" />
+
+            <label for="weekly-target">Weekly target</label>
+            <input id="weekly-target" type="number" min="1" step="1" value="250" />
+
+            <label for="goal-date">Target date</label>
+            <input id="goal-date" type="date" />
+
+            <label for="contact-email">Email for reports</label>
+            <input id="contact-email" type="email" placeholder="you@example.com" />
+
+            <label for="contact-phone">Mobile number</label>
+            <input id="contact-phone" type="tel" placeholder="+447900000000" />
+
+            <label class="checkbox-label" for="notifications-enabled">
+              <input id="notifications-enabled" type="checkbox" /> Enable notifications
+            </label>
+
+            <label for="notification-frequency">Reminder frequency</label>
+            <select id="notification-frequency">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="off">Off</option>
+            </select>
+
+            <label for="notification-time">Reminder time</label>
+            <input id="notification-time" type="time" value="09:00" />
+
+            <p id="notification-status" class="help-text">Notifications are not enabled yet.</p>
+
+            <div class="form-actions">
+              <button type="submit">Save settings</button>
+              <button type="button" id="request-notification-permission" class="secondary">Request permission</button>
+              <button type="button" id="send-report" class="secondary">Send summary</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <section class="card transactions-card">
+        <h2>All transactions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactions-body">
+              <tr><td colspan="6">No transactions yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

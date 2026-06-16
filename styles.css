@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #f4f7fb;
@@ -10,6 +10,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: #f4f7fb;
 }
 .app-shell {
   max-width: 1140px;
@@ -23,6 +24,11 @@ body {
   align-items: baseline;
   gap: 14px;
   margin-bottom: 24px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 .hero h1 {
   margin: 0;
@@ -75,25 +81,23 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+.goal-summary {
+  display: grid;
+  gap: 12px;
+}
+.goal-progress-bar,
 .progress-bar {
   width: 100%;
   height: 14px;
   background: #eef4ff;
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 10px;
 }
 .progress-fill {
   width: 0;
   height: 100%;
   background: linear-gradient(90deg, #3664ff 0%, #2fc7b3 100%);
   transition: width 0.3s ease;
-}
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-  color: #475569;
 }
 #total-income,
 #total-expenses,
@@ -102,12 +106,18 @@ body {
   font-weight: 700;
   margin-top: 12px;
 }
-.form-card label {
+.form-card label,
+.checkbox-label {
   display: block;
   margin-bottom: 8px;
   margin-top: 14px;
   font-size: 0.95rem;
   color: #334155;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 input,
 select {
@@ -126,6 +136,7 @@ select:focus {
 }
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 18px;
 }
@@ -219,6 +230,12 @@ td button {
 }
 .transactions-card {
   overflow: hidden;
+}
+.help-text {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 @media (max-width: 860px) {
   .stats-panel {
